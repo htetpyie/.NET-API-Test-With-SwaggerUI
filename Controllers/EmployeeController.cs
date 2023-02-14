@@ -1,4 +1,6 @@
-﻿using DotNetAPITutorial.Interfaces;
+﻿using AutoMapper;
+using DotNetAPITutorial.Dto;
+using DotNetAPITutorial.Interfaces;
 using DotNetAPITutorial.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -13,17 +15,19 @@ namespace DotNetAPITutorial.Controllers
     public class EmployeeController : Controller
     {
         private readonly IEmployeeService _iEmployeeService;
+        private readonly IMapper _mapper;
 
-        public EmployeeController(IEmployeeService iEmployee)
+        public EmployeeController(IEmployeeService iEmployee, IMapper mapper)
         {
             this._iEmployeeService = iEmployee;
+            _mapper = mapper;
         }
 
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Employee>))]
         public IActionResult GetEmployees()
         {
-            var employee = _iEmployeeService.GetAllEmployee();
+            var employee = _mapper.Map<List<EmployeeDTO>>(_iEmployeeService.GetAllEmployee());
             if ( !ModelState.IsValid )           
                 return BadRequest(ModelState);          
             return Ok(employee);
@@ -38,7 +42,7 @@ namespace DotNetAPITutorial.Controllers
                 return NotFound();
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-            var emp = _iEmployeeService.GetEmployee(empId);
+            var emp = _mapper.Map<EmployeeDTO>(_iEmployeeService.GetEmployee(empId));
             return Ok(emp);
         }
     }

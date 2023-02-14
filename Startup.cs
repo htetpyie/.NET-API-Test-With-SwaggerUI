@@ -33,6 +33,7 @@ namespace DotNetAPITutorial
             services.AddDbContext<DataContext>(options =>
             options.UseSqlServer( Configuration.GetConnectionString("DefaultConnection")));
             services.AddSwaggerGen();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); //to use mapper
             services.AddScoped<IEmployeeService, EmployeeService>();
         }
 

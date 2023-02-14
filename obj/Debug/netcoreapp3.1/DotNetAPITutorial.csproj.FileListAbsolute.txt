@@ -65,3 +65,6 @@ C:\Users\htetp\source\repos\DotNetAPITutorial\bin\Debug\netcoreapp3.1\Swashbuckl
 C:\Users\htetp\source\repos\DotNetAPITutorial\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\htetp\source\repos\DotNetAPITutorial\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\htetp\source\repos\DotNetAPITutorial\obj\Debug\netcoreapp3.1\DotNetAPITutorial.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\htetp\source\repos\DotNetAPITutorial\bin\Debug\netcoreapp3.1\AutoMapper.dll
+C:\Users\htetp\source\repos\DotNetAPITutorial\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\htetp\source\repos\DotNetAPITutorial\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
