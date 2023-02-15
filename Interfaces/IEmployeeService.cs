@@ -11,5 +11,6 @@ namespace DotNetAPITutorial.Interfaces
         IEnumerable<Employee> GetAllEmployee();
         Employee GetEmployee(int id);
         bool IsEmployeeExists(int id);
+        bool SaveEmployee(int loginId, Employee employee);
     }
 }

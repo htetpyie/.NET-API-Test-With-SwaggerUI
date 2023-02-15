@@ -45,5 +45,33 @@ namespace DotNetAPITutorial.Controllers
             var emp = _mapper.Map<EmployeeDTO>(_iEmployeeService.GetEmployee(empId));
             return Ok(emp);
         }
+
+        [HttpPost()]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult CreateEmployee([FromQuery]int userId,[FromBody] EmployeeDTO employee)
+        {
+            int loginUserId = userId;
+            if (employee == null)
+                return BadRequest(ModelState);
+
+            var employeeByName = _iEmployeeService.GetAllEmployee()
+                .Any(e => e.StaffId.TrimEnd() == employee.StaffId.TrimEnd());
+
+            if (employeeByName)
+            {
+                ModelState.AddModelError("", "Employee Already Exists");// ("key","Employee Already Exists")
+                return StatusCode(422, ModelState);
+            }
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var employeeEntity = _mapper.Map<Employee>(employee);
+            if (!_iEmployeeService.SaveEmployee(loginUserId, employeeEntity))
+                return StatusCode(500, "Something went wrong while saving.");
+
+            return Ok("successfully created.");               
+        }
     }
 }

@@ -13,6 +13,7 @@ namespace DotNetAPITutorial.Helpers
         public MappingProfiles()
         {
             CreateMap<Employee, EmployeeDTO>();
+            CreateMap<EmployeeDTO, Employee>();
         }
     }
 }

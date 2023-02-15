@@ -1,4 +1,5 @@
 ﻿using DotNetAPITutorial.Context;
+using DotNetAPITutorial.Dto;
 using DotNetAPITutorial.Interfaces;
 using DotNetAPITutorial.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -31,6 +32,18 @@ namespace DotNetAPITutorial.Implementations
         public bool IsEmployeeExists(int id)
         {
             return _context.Employee.Any(e => e.Id == id && e.IsDelete == false);
+        }
+
+        public bool SaveEmployee(int loginId, Employee employee)
+        {
+            employee.CreatedBy = loginId;
+            _context.Add(employee);
+            return  Save();
+        }
+
+        private bool Save()
+        {
+            return _context.SaveChanges() > 0 ? true : false;
         }
     }
 }
