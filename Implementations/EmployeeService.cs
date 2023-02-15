@@ -41,6 +41,13 @@ namespace DotNetAPITutorial.Implementations
             return  Save();
         }
 
+        public bool UpdateEmployee(int loginId, Employee employee)
+        {
+            employee.UpdatedBy = loginId;
+            _context.Update(employee);
+            return Save();
+        }
+
         private bool Save()
         {
             return _context.SaveChanges() > 0 ? true : false;

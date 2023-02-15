@@ -73,5 +73,27 @@ namespace DotNetAPITutorial.Controllers
 
             return Ok("successfully created.");               
         }
+
+        [HttpPut]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(400)]
+        public IActionResult UpdateEmployee([FromBody] EmployeeDTO employeeDTO)
+        {
+            int loginUserId = 1;
+            if (employeeDTO == null)
+                return BadRequest(ModelState);
+            if (!_iEmployeeService.IsEmployeeExists(employeeDTO.Id))
+                return NotFound();
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            var employee = _mapper.Map<Employee>(employeeDTO);
+            if (!_iEmployeeService.UpdateEmployee(loginUserId, employee))
+            {
+                ModelState.AddModelError("", "Something went wrong updating Employee");
+                return StatusCode(500, ModelState);
+            }
+            return NoContent();
+        }
     }
 }
