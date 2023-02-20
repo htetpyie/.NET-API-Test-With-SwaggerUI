@@ -13,5 +13,6 @@ namespace DotNetAPITutorial.Interfaces
         bool IsEmployeeExists(int id);
         bool SaveEmployee(int loginId, Employee employee);
         bool UpdateEmployee(int loginId, Employee employee);
+        bool DeleteEmployee(Employee employeeId);
     }
 }

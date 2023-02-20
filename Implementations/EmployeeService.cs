@@ -18,7 +18,13 @@ namespace DotNetAPITutorial.Implementations
         {
             _context = context;
         }
-       
+
+        public bool DeleteEmployee(Employee employee)
+        {
+            _context.Remove(employee);
+            return Save();
+        }
+
         public IEnumerable<Employee> GetAllEmployee()
         {
             return _context.Employee.Where(e => e.IsDelete == false).OrderBy(e => e.Id).ToList();

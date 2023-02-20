@@ -95,5 +95,28 @@ namespace DotNetAPITutorial.Controllers
             }
             return NoContent();
         }
+
+        [HttpDelete("{employeeId}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(400)]
+        public IActionResult DeleteEmployee(int employeeId)
+        {
+            if (!_iEmployeeService.IsEmployeeExists(employeeId))
+                return NotFound();
+
+            var employee = _iEmployeeService.GetEmployee(employeeId);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            
+            if( !_iEmployeeService.DeleteEmployee(employee))
+            {
+                ModelState.AddModelError("", "Something went wrong in deleting employee");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+                
+        }
     }
 }
